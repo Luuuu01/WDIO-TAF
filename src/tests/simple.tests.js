@@ -1,5 +1,4 @@
-import DashboardPage from './../po/pages/dashboard.page.js';
-import DoctorsPage from './../po/pages/doctors.page.js';
+import { DashboardPage, DoctorsPage } from './../po/pages/index.js';
 
 const dashboardPage = new DashboardPage();
 const doctorsPage = new DoctorsPage();
@@ -9,7 +8,9 @@ describe('Doctors page', () => {
         await dashboardPage.open();
     });
     it('Check page title', async () => {
-        await expect(browser).toHaveTitle('Appointment Planner - Syncfusion Angular Components Showcase App');
+        await expect(browser).toHaveTitle(
+            'Appointment Planner - Syncfusion Angular Components Showcase App'
+        );
     });
     it('Open modal window for adding a new doctor', async () => {
         await dashboardPage.sideMenu.item('doctors').click();
@@ -20,21 +21,23 @@ describe('Doctors page', () => {
         await dashboardPage.sideMenu.item('doctors').click();
         doctorsPage.doctorListHeader.addNewDoctorBtn.click();
         await doctorsPage.addDoctorModal.rootEl.waitForDisplayed();
-        await $('[name="Name"]').setValue('John Doe');
-        await $('[name="Email"]').setValue('test@test.com');
-        await $('#DoctorMobile').setValue('1111111111');
-        await $('[name="Education"]').setValue('Basic');
-        await $('[name="Designation"]').setValue('Test');
-        await $('//*[.="Save"]').click();
+        await doctorsPage.addDoctorModal.input('name').setValue('John Doe');
+        await doctorsPage.addDoctorModal.input('email').setValue('test@test.com');
+        await doctorsPage.addDoctorModal.input('phone').setValue('1111111111');
+        await doctorsPage.addDoctorModal.input('education').setValue('Basic');
+        await doctorsPage.addDoctorModal.input('designation').setValue('Test');
+        await doctorsPage.addDoctorModal.saveButton.click();
         await expect(doctorsPage.addDoctorModal.rootEl).not.toBeDisplayed();
-        await expect($('#Specialist_8').$('.name')).toHaveText('Dr. John Doe');
-        await expect($('#Specialist_8').$('.education')).toHaveText('basic', {ignoreCase: true});
+        await expect(doctorsPage.specialistCard(8).name).toHaveText('Dr. John Doe');
+        await expect(doctorsPage.specialistCard(8).education).toHaveText('basic', {
+            ignoreCase: true
+        });
     });
     it('Close a modal window for adding a new doctor', async () => {
         await dashboardPage.sideMenu.item('doctors').click();
         doctorsPage.doctorListHeader.addNewDoctorBtn.click();
         await doctorsPage.addDoctorModal.rootEl.waitForDisplayed();
-        await $('.new-doctor-dialog .e-dlg-closeicon-btn').click();
+        await doctorsPage.addDoctorModal.closeButton.click();
         await expect(doctorsPage.addDoctorModal.rootEl).not.toBeDisplayed();
     });
-})
+});

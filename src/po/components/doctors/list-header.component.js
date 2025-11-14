@@ -8,4 +8,4 @@ export default class ListHeaderComponent extends BaseComponent {
     get addNewDoctorBtn() {
         return this.rootEl.$('button.e-control');
     }
-} 
+}

@@ -1,2 +1,4 @@
 node_modules
 artifacts
+.prettierrc.json
+eslint.config.js

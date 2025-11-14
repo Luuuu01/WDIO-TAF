@@ -1,6 +1,5 @@
 export default class BaseComponent {
-
-    constructor(rootSelector) { 
+    constructor(rootSelector) {
         this.rootSelector = rootSelector;
     }
 
