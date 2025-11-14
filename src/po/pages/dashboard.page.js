@@ -1,12 +1,10 @@
 import SideMenuComponent from './../components/common/sidemenu.component.js';
+import BasePage from './base.page.js';
 
-export default class DashboardPage {
+export default class DashboardPage extends BasePage {
 
     constructor() {
+        super('/showcase/angular/appointmentplanner/#/dashboard');
         this.sideMenu = new SideMenuComponent();
-    }
-
-    async open() {
-        await browser.url('https://ej2.syncfusion.com/showcase/angular/appointmentplanner/#/dashboard');
     }
 }

@@ -1,6 +1,8 @@
-export default class ListHeaderComponent {
-    get rootEl(){
-        return $('.specialization-types');
+import BaseComponent from '../common/base.component.js';
+
+export default class ListHeaderComponent extends BaseComponent {
+    constructor() {
+        super('.specialization-types');
     }
 
     get addNewDoctorBtn() {
